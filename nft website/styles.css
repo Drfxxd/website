@@ -1,0 +1,75 @@
+.background {
+    display: flex;
+    flex-flow: column;
+    background-position: center;
+    background-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/9bc27292880429.5e569ff84e4d0.gif);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
+}
+h4{
+    margin-right: 400px;
+    margin-left: 300px;
+    padding-left: 50px;
+    font-family:cursive ;
+}
+h1{
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    margin-left:300px ;
+    margin-right: 200px;
+    color: rgb(255, 255, 255);
+    font-family: cursive;
+    font-size: 100px;
+}
+h2{
+    color: rgb(255, 255, 255);
+    font-family: cursive;
+    font-style: italic;
+
+}
+h6{
+    color: rgb(0, 203, 253);
+}
+p{
+    color: rgb(0, 5, 8);
+    font-family: cursive
+}
+.fa {
+    padding: 10px;
+    font-size: 30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none ;
+    margin: 2px 2px;
+    border-radius: 10px;
+    margin-left: 20px;
+  }
+  
+  .fa-twitter {
+    background: #55ACEE;
+    color: white;
+  }
+  
+  .fa-instagram {
+    background: #ff00dd;
+    color: white;
+  }
+  p:hover{
+        background-color: rgb(252, 249, 249);
+  }
+  h2:hover{
+      background-color: rgb(247, 252, 252);
+  }
+h4:hover{
+    background-color: aqua;
+}
+  h:hover{
+      background-color: rgb(251, 255, 255);
+  }
+  p1:hover{
+      background-color: aqua;
+  }p2:hover{
+      background-color: aqua;
+  }
+ 

@@ -1,0 +1,30 @@
+body{
+    background-color: aqua;
+}
+      
+
+
+ h1{
+    font-family: cursive;
+    padding-left: 100px;
+
+ }
+ h2{
+    margin-left: 40px;
+    font-family: cursive;
+    font-weight: 100px;
+    padding-left: 10px;
+
+ }
+ h2:hover{
+    background-color: aliceblue;
+    
+ }
+ h3{
+    margin-left: 100px;
+    font-family: cursive;
+    
+ }p{
+    margin-left: 20px;
+    font-family: cursive;
+}

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/gsap.min.js"></script>
+      <link rel="stylesheet" href="styles.css">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <title>ICON APES</title>
+      <link rel="Icon" href="./images/pixil-gif-drawing (2).gif" />
+      <style>
+         html, 
+         body {
+            height: 100%;
+         }
+         body {
+           margin: 0;
+         }
+
+         #canvas {
+            width: 100%;
+            height: 100%;
+         }
+     </style>
+  </head>
+  <body>
+     <div class="background">
+       <h1 > ICON APES !</h1>
+       <br/>
+       <h4 style="background-color: aliceblue;">WE ARE THE CREATERS .</h4><br/>
+         <p class="content1" style=" border:10px white solid;border-radius: 10px;
+             height: 300px; width: 500px;margin-left: 350px; padding-left: 20px;background-color: aqua;"></br>
+          <h style="font-family: cursive;font-size: 30px;margin-left: 90px;">"ICON APES CLUB"</h></br></br><p1 style="margin-left: 50px;">
+            Our club is Collectible NFT project.Each <strong>APES</strong>lives on the polygon blockchain as NON 
+            FUNGIBLE TOKEN (NFT) made of unique combination of trits and "DNAs" . 
+            Build in <b>"LOW GAS NFT"</b> contract.</p1></br></br>
+            <p2 style="margin-left: 50px ;">Holding a <b>ICON APES</b>make you as a member of our community.
+            This leads a connection between members and our CLUB
+            lead us to "WORK" and "BUILD" together and CREATE ADVENTURES!</p2>
+         </p>
+       <br/>
+       <br/>
+       <br/>
+       <h2 style="margin-left: 400px;margin-right: 430px;font-size: 50px;">CLICK TO MINT </h2></br>
+         <a style="margin-left: 500px;" target="_blank" href="https://iconapes.netlify.app">
+          <img src="images/mint button.gif"  width="200">
+         </a></br>
+         </br>
+         </br>
+         <div class="iframe_a">
+            <iframe src="sub.html" width="400" height="400" style="margin-left: 430px;border-radius: 20px;box-shadow: black 10px;border: 10px solid white;"></iframe>
+         </div>
+       </br>
+       </br>
+       </br>
+       </br>        
+       <h2 style="margin-left:470px;margin-right: 300px;padding: 10px;">MEET OUR ALLROUNDER #</h2>
+       <div class="inner content">
+           <h2 style="width: 400px; height: 500px;border: 5px solid rgb(250, 247, 247);margin-left: 450px;border-radius: 50px;background-color: aqua;">
+              <img src="/images/35.png" style="width: 200px; height: 200px;border: 5px solid rgb(255, 253, 253);border-radius: 400px;margin-left: 100px;margin-top: 20px;"><p><h style="padding-left: 30px;"><b>ATHITHYA ,</b></br><h7>founder/artist/developer/web designer!</h7></br>nothing special,but an undergraduate imaginative "GOD"</h></p>
+           </h2>
+       </div>
+
+       <h6 style="font-family:cursive;margin-left: 25px;" >SOCIAL MEDIA</h6>
+       <a target="_blank" href="https://twitter.com/Athithya2001" class="fa fa-twitter"></a>
+       <a target="_blank" href="https://instagram.com/icon_ap_es" class="fa fa-instagram"></a>
+       <a href="https://opensea.io/collection/icon-apes-nft" target="_blank">
+          <img style="height: 50;width: 60; padding: 3px;background-color: aliceblue; border-radius: 10px;margin-left: 20px;margin-bottom: -12px;" src="images/Logomark-Blue (2).png" alt="opensea";/>
+       </a>
+       <canvas id="canvas"></canvas>
+        <p1 style="margin-left: 5px;font-family: cursive; background-color: aqua;">
+          @ 2022 ICON APES
+          ALL RIGHTS RESERVED.
+        </p1> 
+     </div>
+  </body>
+  <script>
+     console.clear()
+console.log('lsakdfalskjdflnksd')
+
+const config = {
+  src: './p.png',
+  rows: 10,
+  cols: 5
+}
+
+// UTILS
+
+const randomRange = (min, max) => min + Math.random() * (max - min)
+
+const randomIndex = (array) => randomRange(0, array.length) | 0
+
+const removeFromArray = (array, i) => array.splice(i, 1)[0]
+
+const removeItemFromArray = (array, item) => removeFromArray(array, array.indexOf(item))
+
+const removeRandomFromArray = (array) => removeFromArray(array, randomIndex(array))
+
+const getRandomFromArray = (array) => (
+  array[randomIndex(array) | 0]
+)
+
+// TWEEN FACTORIES
+
+const resetPeep = ({ stage, peep }) => {
+  const direction = Math.random() > 0.5 ? 1 : -1
+  // using an ease function to skew random to lower values to help hide that peeps have no legs
+  const offsetY = 100 - 250 * gsap.parseEase('power2.in')(Math.random())
+  const startY = stage.height - peep.height + offsetY
+  let startX
+  let endX
+  
+  if (direction === 1) {
+    startX = -peep.width
+    endX = stage.width
+    peep.scaleX = 1
+  } else {
+    startX = stage.width + peep.width
+    endX = 0
+    peep.scaleX = -1
+  }
+  
+  peep.x = startX
+  peep.y = startY
+  peep.anchorY = startY
+  
+  return {
+    startX,
+    startY,
+    endX
+  }
+}
+
+const normalWalk = ({ peep, props }) => {
+  const {
+    startX,
+    startY,
+    endX
+  } = props
+
+  const xDuration = 10
+  const yDuration = 0.25
+  
+  const tl = gsap.timeline()
+  tl.timeScale(randomRange(0.5, 1.5))
+  tl.to(peep, {
+    duration: xDuration,
+    x: endX,
+    ease: 'none'
+  }, 0)
+  tl.to(peep, {
+    duration: yDuration,
+    repeat: xDuration / yDuration,
+    yoyo: true,
+    y: startY - 10
+  }, 0)
+    
+  return tl
+}
+
+const walks = [
+  normalWalk,
+]
+
+// CLASSES
+
+class Peep {
+  constructor({
+    image,
+    rect,
+  }) {
+    this.image = image
+    this.setRect(rect)
+    
+    this.x = 0
+    this.y = 0
+    this.anchorY = 0
+    this.scaleX = 1
+    this.walk = null
+  }
+  
+  setRect (rect) {
+    this.rect = rect
+    this.width = rect[2]
+    this.height = rect[3]
+    
+    this.drawArgs = [
+      this.image,
+      ...rect,
+      0, 0, this.width, this.height
+    ]  
+  }
+  
+  render (ctx) {
+    ctx.save()
+    ctx.translate(this.x, this.y)
+    ctx.scale(this.scaleX, 1)
+    ctx.drawImage(...this.drawArgs)
+    ctx.restore()
+  }
+}
+
+// MAIN
+
+const img = document.createElement('img')
+img.onload = init
+img.src = config.src
+
+const canvas = document.querySelector('#canvas')
+const ctx = canvas.getContext('2d')
+
+const stage = {
+  width: 0,
+  height: 0,
+}
+
+const allPeeps = []
+const availablePeeps = []
+const crowd = []
+
+function init () {  
+  createPeeps()
+  
+  // resize also (re)populates the stage
+  resize()
+
+  gsap.ticker.add(render)
+  window.addEventListener('resize', resize)
+}
+
+function createPeeps () {
+  const {
+    rows,
+    cols
+  } = config
+  const {
+    naturalWidth: width,
+    naturalHeight: height
+  } = img
+  const total = rows * cols
+  const rectWidth = width / rows
+  const rectHeight = height / cols
+  
+  for (let i = 0; i < total; i++) {
+    allPeeps.push(new Peep({
+      image: img,
+      rect: [
+        (i % rows) * rectWidth,
+        (i / rows | 0) * rectHeight,
+        rectWidth,
+        rectHeight,
+      ]
+    }))
+  }  
+}
+
+function resize () {
+  stage.width = canvas.clientWidth
+  stage.height = canvas.clientHeight
+  canvas.width = stage.width * devicePixelRatio
+  canvas.height = stage.height * devicePixelRatio
+  
+  crowd.forEach((peep) => {
+    peep.walk.kill()
+  })
+  
+  crowd.length = 0
+  availablePeeps.length = 0
+  availablePeeps.push(...allPeeps)
+  
+  initCrowd()
+}
+
+function initCrowd () {
+  while (availablePeeps.length) {
+    // setting random tween progress spreads the peeps out
+    addPeepToCrowd().walk.progress(Math.random())
+  }
+}
+
+function addPeepToCrowd () {
+  const peep = removeRandomFromArray(availablePeeps)
+  const walk = getRandomFromArray(walks)({
+    peep,
+    props: resetPeep({
+      peep,
+      stage,
+    })
+  }).eventCallback('onComplete', () => {
+    removePeepFromCrowd(peep)
+    addPeepToCrowd()
+  })
+  
+  peep.walk = walk
+  
+  crowd.push(peep)
+  crowd.sort((a, b) => a.anchorY - b.anchorY)
+  
+  return peep
+}
+
+function removePeepFromCrowd (peep) {
+  removeItemFromArray(crowd, peep)
+  availablePeeps.push(peep)
+}
+
+function render () {
+  canvas.width = canvas.width
+  ctx.save()
+  ctx.scale(devicePixelRatio, devicePixelRatio)
+  
+  crowd.forEach((peep) => {
+    peep.render(ctx)
+  })
+  
+  ctx.restore()
+}
+
+  </script>
+</html>
